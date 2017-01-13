@@ -33,12 +33,12 @@ namespace CarFactory.Providers
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            string device = context.OwinContext.Get<string>("device");
-            if (!ValidateDevice(device))
-            {
-                context.SetError("invalid_device", "device must be sent");
-                return;
-            }
+            //string device = context.OwinContext.Get<string>("device");
+            //if (!ValidateDevice(device))
+            //{
+            //    context.SetError("invalid_device", "device must be sent");
+            //    return;
+            //}
 
             User user;
             if (!_authService.AuthenticateUser(context.UserName, context.Password, out user))
@@ -49,7 +49,7 @@ namespace CarFactory.Providers
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            identity.AddClaim(new Claim(ApiConstants.ClaimDevice, device));
+            //identity.AddClaim(new Claim(ApiConstants.ClaimDevice, device));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
             {

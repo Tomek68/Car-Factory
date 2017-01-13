@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace CarFactory.Controllers
 {
+
     public class CarsBaseController : ApiController
     {
         private readonly ClaimsIdentity _claimsIdentity;
@@ -75,10 +76,5 @@ namespace CarFactory.Controllers
                 },
 
             };
-
-
-        protected string Device => _claimsIdentity.IsAuthenticated
-            ? _claimsIdentity.FindFirst(ApiConstants.ClaimDevice).Value
-            : string.Empty;
     }
 }
